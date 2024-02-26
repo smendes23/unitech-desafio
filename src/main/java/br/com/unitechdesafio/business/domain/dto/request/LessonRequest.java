@@ -1,6 +1,5 @@
 package br.com.unitechdesafio.business.domain.dto.request;
 
-import br.com.unitechdesafio.business.domain.entity.RegistrationEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
