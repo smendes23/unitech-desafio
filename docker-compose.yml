@@ -1,0 +1,17 @@
+version: "24.0.2"
+services:
+  db:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports: 
+      - "27017:27017"
+  api:   
+    build: ""
+    container_name: fourd-api
+    restart: always
+    ports: 
+      - "8080:8080"
+    depends_on:
+      - db
+    
