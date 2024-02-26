@@ -1,10 +1,10 @@
 package br.com.unitechdesafio.business.service;
 
-import br.com.unitech.business.domain.dto.request.LessonRequest;
-import br.com.unitech.business.domain.entity.LessonEntity;
-import br.com.unitech.business.domain.repository.LessonRepository;
-import br.com.unitech.business.domain.repository.RegistrationRepository;
-import br.com.unitech.infrastructure.service.BackOfficeService;
+import br.com.unitechdesafio.business.domain.dto.request.LessonRequest;
+import br.com.unitechdesafio.business.domain.entity.LessonEntity;
+import br.com.unitechdesafio.business.domain.repository.LessonRepository;
+import br.com.unitechdesafio.business.domain.repository.RegistrationRepository;
+import br.com.unitechdesafio.infrastructure.service.BackOfficeService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
-import static br.com.unitech.business.domain.enums.Status.APROVADO;
+import static br.com.unitechdesafio.business.domain.enums.Status.APROVADO;
 
 @Slf4j
 @Service

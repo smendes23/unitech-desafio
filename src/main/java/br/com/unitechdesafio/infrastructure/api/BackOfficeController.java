@@ -1,8 +1,8 @@
 package br.com.unitechdesafio.infrastructure.api;
 
-import br.com.unitech.infrastructure.model.BackOfficeEntity;
-import br.com.unitech.infrastructure.resource.BackOfficeResource;
-import br.com.unitech.infrastructure.service.BackOfficeService;
+import br.com.unitechdesafio.infrastructure.model.BackOfficeEntity;
+import br.com.unitechdesafio.infrastructure.resource.BackOfficeResource;
+import br.com.unitechdesafio.infrastructure.service.BackOfficeService;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

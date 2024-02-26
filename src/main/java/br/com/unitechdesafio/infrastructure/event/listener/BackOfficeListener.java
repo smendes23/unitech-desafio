@@ -1,7 +1,7 @@
 package br.com.unitechdesafio.infrastructure.event.listener;
 
-import br.com.unitech.business.domain.entity.UserDetailsEntity;
-import br.com.unitech.infrastructure.event.BackOfficeEvent;
+import br.com.unitechdesafio.business.domain.entity.UserDetailsEntity;
+import br.com.unitechdesafio.infrastructure.event.BackOfficeEvent;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

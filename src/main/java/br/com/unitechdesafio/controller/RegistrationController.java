@@ -1,10 +1,10 @@
 package br.com.unitechdesafio.controller;
 
-import br.com.unitech.business.domain.dto.request.RegistrationRequest;
-import br.com.unitech.business.domain.entity.RegistrationEntity;
-import br.com.unitech.business.resource.RegistrationResource;
-import br.com.unitech.business.service.RegistrationService;
-import br.com.unitech.infrastructure.api.BackOfficeController;
+import br.com.unitechdesafio.business.domain.dto.request.RegistrationRequest;
+import br.com.unitechdesafio.business.domain.entity.RegistrationEntity;
+import br.com.unitechdesafio.business.resource.RegistrationResource;
+import br.com.unitechdesafio.business.service.RegistrationService;
+import br.com.unitechdesafio.infrastructure.api.BackOfficeController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

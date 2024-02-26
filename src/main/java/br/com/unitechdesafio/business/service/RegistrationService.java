@@ -1,13 +1,13 @@
 package br.com.unitechdesafio.business.service;
 
-import br.com.unitech.business.domain.dto.request.RegistrationRequest;
-import br.com.unitech.business.domain.entity.RegistrationEntity;
-import br.com.unitech.business.domain.entity.UserDetailsEntity;
-import br.com.unitech.business.domain.enums.Status;
-import br.com.unitech.business.domain.repository.RegistrationRepository;
-import br.com.unitech.business.domain.repository.UserDetailsRepository;
-import br.com.unitech.infrastructure.event.BackOfficeEvent;
-import br.com.unitech.infrastructure.service.BackOfficeService;
+import br.com.unitechdesafio.business.domain.dto.request.RegistrationRequest;
+import br.com.unitechdesafio.business.domain.entity.RegistrationEntity;
+import br.com.unitechdesafio.business.domain.entity.UserDetailsEntity;
+import br.com.unitechdesafio.business.domain.enums.Status;
+import br.com.unitechdesafio.business.domain.repository.RegistrationRepository;
+import br.com.unitechdesafio.business.domain.repository.UserDetailsRepository;
+import br.com.unitechdesafio.infrastructure.event.BackOfficeEvent;
+import br.com.unitechdesafio.infrastructure.service.BackOfficeService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
@@ -18,8 +18,8 @@ import reactor.core.scheduler.Schedulers;
 
 import java.util.Objects;
 
-import static br.com.unitech.business.domain.enums.Role.*;
-import static br.com.unitech.business.domain.enums.Status.PENDENTE;
+import static br.com.unitechdesafio.business.domain.enums.Role.ROLE_USER;
+import static br.com.unitechdesafio.business.domain.enums.Status.PENDENTE;
 
 @Slf4j
 @Service

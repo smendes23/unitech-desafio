@@ -1,6 +1,6 @@
 package br.com.unitechdesafio.business.domain.entity;
 
-import br.com.unitech.infrastructure.model.BackOfficeEntity;
+import br.com.unitechdesafio.infrastructure.model.BackOfficeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

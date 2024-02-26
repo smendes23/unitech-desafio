@@ -1,6 +1,6 @@
 package br.com.unitechdesafio.infrastructure.event;
 
-import br.com.unitech.business.domain.entity.UserDetailsEntity;
+import br.com.unitechdesafio.business.domain.entity.UserDetailsEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;

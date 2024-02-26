@@ -1,6 +1,6 @@
 package br.com.unitechdesafio.infrastructure.advice;
 
-import br.com.unitech.infrastructure.exception.ResourceNotFoundException;
+import br.com.unitechdesafio.infrastructure.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;

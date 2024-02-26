@@ -1,6 +1,6 @@
 package br.com.unitechdesafio.infrastructure.config.security;
 
-import br.com.unitech.business.service.UserDetailsService;
+import br.com.unitechdesafio.business.service.UserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;

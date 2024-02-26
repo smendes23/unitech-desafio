@@ -1,7 +1,7 @@
 package br.com.unitechdesafio.business.domain.entity;
 
 
-import br.com.unitech.infrastructure.model.BackOfficeEntity;
+import br.com.unitechdesafio.infrastructure.model.BackOfficeEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

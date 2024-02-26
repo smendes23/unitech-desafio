@@ -1,6 +1,6 @@
 package br.com.unitechdesafio.business.domain.dto.request;
 
-import br.com.unitech.business.domain.entity.RegistrationEntity;
+import br.com.unitechdesafio.business.domain.entity.RegistrationEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -22,5 +22,5 @@ public class LessonRequest {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
     private Date date;
 
-    private RegistrationEntity teacher;
+    private RegistrationRequest teacher;
 }

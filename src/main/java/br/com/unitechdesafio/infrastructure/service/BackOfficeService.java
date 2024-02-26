@@ -1,7 +1,7 @@
 package br.com.unitechdesafio.infrastructure.service;
 
-import br.com.unitech.infrastructure.model.BackOfficeEntity;
-import br.com.unitech.infrastructure.repository.BackOfficeRepository;
+import br.com.unitechdesafio.infrastructure.model.BackOfficeEntity;
+import br.com.unitechdesafio.infrastructure.repository.BackOfficeRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;

@@ -1,7 +1,7 @@
 package br.com.unitechdesafio.business.domain.repository;
 
-import br.com.unitech.business.domain.entity.RegistrationEntity;
-import br.com.unitech.infrastructure.repository.BackOfficeRepository;
+import br.com.unitechdesafio.business.domain.entity.RegistrationEntity;
+import br.com.unitechdesafio.infrastructure.repository.BackOfficeRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
