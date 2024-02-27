@@ -3,7 +3,6 @@ package br.com.unitechdesafio.business.service;
 import br.com.unitechdesafio.business.domain.dto.request.LoginRequest;
 import br.com.unitechdesafio.business.domain.entity.JwtEntity;
 import br.com.unitechdesafio.infrastructure.config.security.JwtSupport;
-import br.com.unitechdesafio.infrastructure.dto.Jwt;
 import br.com.unitechdesafio.infrastructure.service.BackOfficeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
@@ -38,8 +37,8 @@ public class AuthenticationService extends BackOfficeService<JwtEntity, LoginReq
                 .flatMap(user -> {
                     if (encoder.matches(valueObject.getPassword(), user.getPassword())) {
                         return users.findDetails(user.getUsername())
-                                .map(usr -> new Jwt(jwtSupport.generate(usr).getValue()))
-                                .map(Jwt::getToken);
+                                .map(usr -> new JwtEntity(jwtSupport.generate(usr).getValue()))
+                                .map(JwtEntity::getToken);
                     }
                         return Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED));
                 });
