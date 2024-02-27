@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.security.Principal;
+
 @RequiredArgsConstructor
 public class BackOfficeController<E extends BackOfficeEntity, VO> implements BackOfficeResource<VO> {
 
@@ -32,8 +34,8 @@ public class BackOfficeController<E extends BackOfficeEntity, VO> implements Bac
         return this.service.delete(id);
     }
 
-    public Flux<VO> search() {
+    public Flux<VO> search(Principal principal) {
 
-        return this.service.search();
+        return this.service.search(principal);
     }
 }

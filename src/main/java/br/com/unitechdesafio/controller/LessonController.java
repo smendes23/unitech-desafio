@@ -15,4 +15,5 @@ public class LessonController extends BackOfficeController<LessonEntity, LessonR
     public LessonController(LessonService service){
         super(service);
     }
+
 }

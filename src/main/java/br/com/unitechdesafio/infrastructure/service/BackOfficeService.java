@@ -3,23 +3,28 @@ package br.com.unitechdesafio.infrastructure.service;
 import br.com.unitechdesafio.infrastructure.model.BackOfficeEntity;
 import br.com.unitechdesafio.infrastructure.repository.BackOfficeRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.security.Principal;
 import java.util.Objects;
 
+@Slf4j
 @RequiredArgsConstructor
 public abstract class BackOfficeService<T extends BackOfficeEntity, VO> {
 
     private final BackOfficeRepository<T> repository;
 
-    private final ModelMapper modelMapper;
+    protected final ModelMapper modelMapper;
 
     protected final ApplicationEventPublisher applicationEventPublisher;
 
@@ -32,6 +37,10 @@ public abstract class BackOfficeService<T extends BackOfficeEntity, VO> {
 
     @Transactional
     public Mono<String> save(final VO valueObject) {
+        return processObject(valueObject);
+    }
+
+    protected Mono<String> processObject(VO valueObject) {
         return validatePersistVO(valueObject)
                 .filter(Objects::nonNull)
                 .map(this.repository::insert)
@@ -55,16 +64,25 @@ public abstract class BackOfficeService<T extends BackOfficeEntity, VO> {
                 .flatMap(repository::delete);
     }
 
-    public Flux<VO> search() {
+    public Flux<VO> search(Principal principal) {
+        ReactiveSecurityContextHolder.getContext()
+                .log()
+                .map(SecurityContext::getAuthentication)
+                .map(Principal::getName)
+                .defaultIfEmpty("Principal Not Available")
+                .doOnSuccess(name ->
+                        log.info(String.format(" Principal:[%s]",name)));
+        return getAllWithFilter(principal);
+    }
+    protected Principal principal;
 
-        /*var exampleMatcher = ExampleMatcher.matchingAll()
+    private Flux<VO> getAllWithFilter(Principal principal) {
+        this.principal = principal;
 
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+        return getVoWithFilter();
+    }
 
-                .withIgnoreCase();
-
-        var example = Example.of(this.mapValueObjectToEntity(valueObject), exampleMatcher);*/
-
+    protected Flux<VO> getVoWithFilter() {
         return this.repository.findAll().map(entity -> this.modelMapper.map(entity, getValueObjectClass()));
     }
 

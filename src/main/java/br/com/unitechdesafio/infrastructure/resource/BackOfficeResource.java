@@ -1,6 +1,7 @@
 package br.com.unitechdesafio.infrastructure.resource;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.security.Principal;
 
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
@@ -24,7 +27,6 @@ public interface BackOfficeResource<VO> {
 
     @ResponseBody
     @PostMapping
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     Mono<String> save(@RequestBody VO customer);
 
     @PutMapping("/{id}")
@@ -39,6 +41,5 @@ public interface BackOfficeResource<VO> {
 
     @GetMapping
     @ResponseStatus(OK)
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    Flux<VO> search();
+    Flux<VO> search(@AuthenticationPrincipal Principal principal);
 }

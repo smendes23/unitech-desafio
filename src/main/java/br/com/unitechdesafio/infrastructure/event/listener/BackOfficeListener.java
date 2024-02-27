@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +17,6 @@ import java.io.UnsupportedEncodingException;
 @Component
 @RequiredArgsConstructor
 public class BackOfficeListener implements ApplicationListener<BackOfficeEvent> {
-
-    private final JavaMailSender mailSender;
 
     @Override
     public void onApplicationEvent(BackOfficeEvent event) {
@@ -31,6 +30,7 @@ public class BackOfficeListener implements ApplicationListener<BackOfficeEvent> 
     }
 
     public void sendVerificationEmail(UserDetailsEntity entity) throws MessagingException, UnsupportedEncodingException {
+        JavaMailSender mailSender = new JavaMailSenderImpl();
         String subject = "Email  de Verificacao";
         String senderName = "Recebemos o seu cadastro em nosso  Portal de Serviço";
         String mailContent = "<p> Ola professor, "+ entity.getName()+ ", </p>"+

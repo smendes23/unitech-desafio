@@ -1,39 +1,62 @@
 package br.com.unitechdesafio.infrastructure.config.security;
 
-import br.com.unitechdesafio.business.service.UserDetailsService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.ReactiveAuthenticationManager;
-import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.authentication.AuthenticationWebFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsWebFilter;
+import reactor.core.publisher.Mono;
 
+@Configuration
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 public class WebSecurityConfig {
-
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-        return http
-                .csrf().disable()
-                .authorizeExchange()
-                .pathMatchers(HttpMethod.POST, "/registration/**").permitAll()
-                .pathMatchers(HttpMethod.PUT, "/registration/**").hasRole("ADMIN")
-                .pathMatchers(HttpMethod.POST, "/lesson/**").hasRole("ADMIN")
-                .pathMatchers(HttpMethod.PUT, "/lesson/**").hasRole("ADMIN")
-                .anyExchange().authenticated()
-                .and()
-                .formLogin()
-                .and()
-                .httpBasic()
-                .and()
-                .build();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
-    ReactiveAuthenticationManager authenticationManager(UserDetailsService userDetailsService) {
-        return new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService);
+    public SecurityWebFilterChain springSecurityFilterChain(
+            JwtServerAuthenticationConverter converter,
+            ServerHttpSecurity http,
+            JwtAuthenticationManager authManager) {
+
+        AuthenticationWebFilter filter = new AuthenticationWebFilter(authManager);
+        filter.setServerAuthenticationConverter(converter);
+
+        http.exceptionHandling()
+                .authenticationEntryPoint((exchange, exception) ->
+                        Mono.fromRunnable(() -> {
+                            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                            exchange.getResponse().getHeaders().set(HttpHeaders.WWW_AUTHENTICATE, "Bearer");
+                        }))
+                .and()
+                .authorizeExchange()
+                .pathMatchers(HttpMethod.POST, "/login").permitAll()
+                .pathMatchers(HttpMethod.POST, "/registration/**").permitAll()
+                .pathMatchers(HttpMethod.PUT, "/registration/**").hasRole("ADMIN")
+                //.pathMatchers(HttpMethod.POST, "/lesson/**").hasRole("ADMIN")
+                .pathMatchers(HttpMethod.PUT, "/lesson/**").hasRole("ADMIN")
+                .anyExchange().authenticated()
+                .and()
+                .addFilterAt(filter, SecurityWebFiltersOrder.AUTHENTICATION)
+                .httpBasic().disable()
+                .formLogin().disable()
+                .csrf().disable();
+
+        return http.build();
     }
 }

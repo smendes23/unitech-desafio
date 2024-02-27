@@ -32,6 +32,5 @@ public class LessonEntity implements BackOfficeEntity {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
 	private Date date;
 
-	@DocumentReference(lazy=true)
-	private RegistrationEntity teacher;
+	private String teacher;
 }
