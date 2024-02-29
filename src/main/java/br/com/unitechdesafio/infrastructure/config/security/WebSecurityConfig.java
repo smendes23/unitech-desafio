@@ -48,7 +48,7 @@ public class WebSecurityConfig {
                 .pathMatchers(HttpMethod.POST, "/login").permitAll()
                 .pathMatchers(HttpMethod.POST, "/registration/**").permitAll()
                 .pathMatchers(HttpMethod.PUT, "/registration/**").hasRole("ADMIN")
-                //.pathMatchers(HttpMethod.POST, "/lesson/**").hasRole("ADMIN")
+                .pathMatchers(HttpMethod.POST, "/lesson/**").hasRole("ADMIN")
                 .pathMatchers(HttpMethod.PUT, "/lesson/**").hasRole("ADMIN")
                 .anyExchange().authenticated()
                 .and()

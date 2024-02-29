@@ -21,10 +21,9 @@ public class BackOfficeListener implements ApplicationListener<BackOfficeEvent> 
     @Override
     public void onApplicationEvent(BackOfficeEvent event) {
         try {
-            sendVerificationEmail(event.getObj());
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
+            //sendVerificationEmail(event.getObj());
+            log.info("Enviando notificação");
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

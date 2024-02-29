@@ -64,7 +64,7 @@ public class RegistrationService extends BackOfficeService<RegistrationEntity, R
                         .build();
 
                 userDetailsRepository
-                        .insert(user)
+                        .save(user)
                         .subscribeOn(Schedulers.boundedElastic())
                         .doOnNext(res ->
                                 applicationEventPublisher
